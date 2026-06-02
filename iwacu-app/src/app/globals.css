@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  --gold: #C6A86A;
+  --gold-light: #D4BC8A;
+  --gold-dark: #A88A50;
+  --black: #0B0B0B;
+  --black-card: #111111;
+  --black-hover: #1A1A1A;
+  --white: #FFFFFF;
+  --gray-light: #E5E5E5;
+  --gray-mid: #888888;
+  --gray-dark: #333333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0B0B0B;
+  color: #FFFFFF;
+  font-family: var(--font-geist-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0B0B;
+}
+::-webkit-scrollbar-thumb {
+  background: #C6A86A;
+  border-radius: 3px;
+}
+
+/* Gold gradient text utility */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #C6A86A 0%, #F0D898 50%, #C6A86A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(198, 168, 106, 0.15);
+}
+
+/* Line clamp utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Swiper custom styles */
+.swiper-pagination-bullet {
+  background: #C6A86A !important;
+  opacity: 0.5;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+  background: #C6A86A !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #C6A86A !important;
+}
