@@ -29,29 +29,35 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.4, delay: index * 0.05 }}
-        className="glass-card rounded-2xl overflow-hidden flex flex-col sm:flex-row hover:border-[#C6A86A]/30 transition-colors group"
+        transition={{ duration: 0.4, delay: index * 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
+        whileHover={{ x: 4, borderColor: "rgba(198, 168, 106, 0.3)", transition: { duration: 0.25 } }}
+        className="glass-card rounded-2xl overflow-hidden flex flex-col sm:flex-row hover:shadow-xl hover:shadow-[#C6A86A]/5 group border border-white/5"
       >
-        {/* Image */}
         <div className="relative w-full sm:w-72 h-48 sm:h-auto shrink-0 overflow-hidden">
           <Image
             src={property.images[0]}
             alt={property.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
+            className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             sizes="(max-width: 640px) 100vw, 288px"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-          <button
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+          <motion.button
+            whileTap={{ scale: 0.85 }}
             onClick={(e) => { e.preventDefault(); toggleFavorite(property.id); }}
             className={cn(
               "absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all",
-              isFav ? "bg-[#C6A86A] text-black" : "bg-black/50 text-white hover:bg-[#C6A86A] hover:text-black"
+              isFav ? "bg-[#C6A86A] text-black" : "bg-black/50 text-white hover:bg-[#C6A86A] hover:text-black backdrop-blur-sm"
             )}
             aria-label="Toggle favourite"
           >
-            <Heart className={cn("w-4 h-4", isFav && "fill-current")} />
-          </button>
+            <motion.span
+              animate={isFav ? { scale: [1, 1.3, 1] } : {}}
+              transition={{ duration: 0.3 }}
+            >
+              <Heart className={cn("w-4 h-4", isFav && "fill-current")} />
+            </motion.span>
+          </motion.button>
           <Badge
             variant={property.priceType === "rent" ? "blue" : "gold"}
             className="absolute top-3 left-3"
@@ -60,7 +66,6 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           </Badge>
         </div>
 
-        {/* Info */}
         <Link href={`/property/${property.id}`} className="flex flex-col justify-between p-5 flex-1">
           <div>
             <div className="flex items-start justify-between mb-2 gap-3">
@@ -98,10 +103,11 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.07 }}
-      className="glass-card rounded-2xl overflow-hidden hover:border-[#C6A86A]/30 transition-all duration-300 group hover:-translate-y-1"
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
+      whileHover={{ y: -6, borderColor: "rgba(198, 168, 106, 0.3)", transition: { duration: 0.25 } }}
+      className="glass-card rounded-2xl overflow-hidden border border-white/5 hover:shadow-2xl hover:shadow-[#C6A86A]/10 hover:bg-white/[0.02] transition-colors group"
     >
       {/* Image */}
       <div className="relative h-52 overflow-hidden">
@@ -109,7 +115,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           src={property.images[0]}
           alt={property.title}
           fill
-          className="object-cover group-hover:scale-108 transition-transform duration-600"
+          className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -123,7 +129,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         </div>
 
         {/* Favourite */}
-        <button
+        <motion.button
+          whileTap={{ scale: 0.85 }}
           onClick={(e) => { e.preventDefault(); toggleFavorite(property.id); }}
           className={cn(
             "absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-all shadow-lg",
@@ -133,12 +140,17 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           )}
           aria-label="Toggle favourite"
         >
-          <Heart className={cn("w-4 h-4", isFav && "fill-current")} />
-        </button>
+          <motion.span
+            animate={isFav ? { scale: [1, 1.3, 1] } : {}}
+            transition={{ duration: 0.3 }}
+          >
+            <Heart className={cn("w-4 h-4", isFav && "fill-current")} />
+          </motion.span>
+        </motion.button>
 
         {/* Price overlay */}
         <div className="absolute bottom-3 left-3">
-          <span className="text-white font-bold text-lg">
+          <span className="text-white font-bold text-lg drop-shadow-lg">
             {formatPrice(property.price)}
           </span>
           {property.priceType === "rent" && (

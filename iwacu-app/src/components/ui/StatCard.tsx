@@ -23,6 +23,7 @@ export const StatCard: React.FC<StatCardProps> = ({
 
   useEffect(() => {
     if (!inView) return;
+    setCount(0);
     const duration = 2000;
     const steps = 60;
     const increment = value / steps;
@@ -42,14 +43,21 @@ export const StatCard: React.FC<StatCardProps> = ({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay }}
-      className="glass-card rounded-2xl p-8 text-center"
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ duration: 0.6, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      whileHover={{ y: -4, borderColor: "rgba(198, 168, 106, 0.3)", transition: { duration: 0.25 } }}
+      className="glass-card rounded-2xl p-8 text-center border border-white/5 hover:shadow-xl hover:shadow-[#C6A86A]/5 hover:bg-white/[0.02] transition-colors"
     >
-      <div className="text-4xl font-bold text-gold-gradient mb-2">
+      <motion.div
+        key={count}
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="text-4xl font-bold text-gold-gradient mb-2"
+      >
         {prefix}{count.toLocaleString()}{suffix}
-      </div>
+      </motion.div>
       <div className="text-white/60 text-sm tracking-widest uppercase">{label}</div>
     </motion.div>
   );

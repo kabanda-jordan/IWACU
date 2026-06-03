@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -55,9 +56,7 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ type }) => {
       {/* Logo / User */}
       <div className={cn("p-5 border-b border-white/5", collapsed && "px-3")}>
         <Link href="/" className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-8 rounded-full bg-[#C6A86A] flex items-center justify-center shrink-0">
-            <span className="text-black font-black text-xs">IW</span>
-          </div>
+          <Image src="/Iwacu_logo.png" alt="IWACU" width={32} height={32} className="w-8 h-8 shrink-0" />
           {!collapsed && <span className="font-black text-lg tracking-widest text-white">IWACU</span>}
         </Link>
         {!collapsed && user && (

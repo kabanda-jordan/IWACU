@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, User, LogOut, LayoutDashboard } from "lucide-react";
@@ -41,9 +42,7 @@ export const Navbar: React.FC = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-full bg-[#C6A86A] flex items-center justify-center">
-            <span className="text-black font-black text-xs">IW</span>
-          </div>
+          <Image src="/Iwacu_logo.png" alt="IWACU" width={32} height={32} className="w-8 h-8" />
           <span className="text-xl font-black tracking-widest text-white group-hover:text-[#C6A86A] transition-colors">
             IWACU
           </span>

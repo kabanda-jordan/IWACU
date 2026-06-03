@@ -68,9 +68,7 @@ export default function RegisterPage() {
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute bottom-12 left-12 right-12">
           <Link href="/" className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 rounded-full bg-[#C6A86A] flex items-center justify-center">
-              <span className="text-black font-black text-sm">IW</span>
-            </div>
+            <Image src="/Iwacu_logo.png" alt="IWACU" width={40} height={40} className="w-10 h-10" />
             <span className="text-2xl font-black tracking-widest text-white">IWACU</span>
           </Link>
           <h2 className="text-white text-2xl font-bold mb-3">Start your property journey today</h2>
@@ -88,9 +86,7 @@ export default function RegisterPage() {
           className="w-full max-w-md"
         >
           <Link href="/" className="flex items-center gap-2 mb-8 lg:hidden">
-            <div className="w-8 h-8 rounded-full bg-[#C6A86A] flex items-center justify-center">
-              <span className="text-black font-black text-xs">IW</span>
-            </div>
+            <Image src="/Iwacu_logo.png" alt="IWACU" width={32} height={32} className="w-8 h-8" />
             <span className="text-xl font-black tracking-widest text-white">IWACU</span>
           </Link>
 

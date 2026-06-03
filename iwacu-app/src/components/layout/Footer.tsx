@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Send, MapPin, Phone, Mail, Globe, MessageCircle, Camera, Briefcase, Play } from "lucide-react";
 
 const footerLinks = {
@@ -49,9 +50,7 @@ export const Footer: React.FC = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-full bg-[#C6A86A] flex items-center justify-center">
-                <span className="text-black font-black text-sm">IW</span>
-              </div>
+              <Image src="/Iwacu_logo.png" alt="IWACU" width={36} height={36} className="w-9 h-9" />
               <span className="text-2xl font-black tracking-widest text-white">IWACU</span>
             </Link>
             <p className="text-white/40 text-sm leading-relaxed mb-6 max-w-xs">
@@ -82,7 +81,7 @@ export const Footer: React.FC = () => {
               </h4>
               <ul className="space-y-3">
                 {links.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.label}>
                     <Link
                       href={link.href}
                       className="text-white/40 text-sm hover:text-[#C6A86A] transition-colors"
