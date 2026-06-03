@@ -61,46 +61,11 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Demo Accounts
-
-| Role      | Email            | Dashboard    |
-| --------- | ---------------- | ------------ |
-| **Buyer** | `buyer@iwacu.rw` | `/dashboard` |
-| **Agent** | `agent@iwacu.rw` | `/agent`     |
-| **Admin** | `admin@iwacu.rw` | `/admin`     |
-
-Any password works (min 6 chars).
-
-## Project Structure
-
-```
-src/
-├── app/                    # Next.js App Router (15+ pages)
-│   ├── page.tsx            # Homepage
-│   ├── properties/         # Property listing + filters
-│   ├── property/[id]/      # Property detail
-│   ├── agents/             # Agent directory
-│   ├── login/              # Login page
-│   ├── register/           # Registration
-│   ├── dashboard/          # Buyer dashboard (6 pages)
-│   ├── agent/              # Agent dashboard (6 pages)
-│   └── admin/              # Admin dashboard (6 pages)
-├── components/
-│   ├── layout/             # Navbar, Footer
-│   ├── ui/                 # Button, Input, Badge, StatCard, Pagination...
-│   ├── property/           # PropertyCard (grid/list layouts)
-│   ├── shared/             # SearchBar, FilterSidebar, AgentCard, ReviewCard
-│   └── dashboard/          # DashboardSidebar, DashboardHeader
-├── data/                   # Mock properties, agents, reviews
-├── store/                  # usePropertyStore, useAuthStore (Zustand)
-├── types/                  # TypeScript interfaces
-├── constants/              # Cities, property types, nav links, etc.
-└── lib/                    # Utility functions
-```
+````
 
 ## Build
 
 ```bash
 npm run build
 npm start
-```
+````
