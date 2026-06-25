@@ -145,8 +145,8 @@ export const WHY_IWACU = [
 ];
 
 export const PLATFORM_STATS = [
-  { label: "Properties Listed", value: 278, suffix: "+" },
-  { label: "Active Agents", value: 45, suffix: "+" },
-  { label: "Happy Clients", value: 1200, suffix: "+" },
-  { label: "Cities Covered", value: 8 },
+  { label: "Properties Listed", value: 2847, suffix: "+" },
+  { label: "Active Agents", value: 126, suffix: "+" },
+  { label: "Happy Clients", value: 5200, suffix: "+" },
+  { label: "Cities Covered", value: 12, suffix: "+" },
 ];
