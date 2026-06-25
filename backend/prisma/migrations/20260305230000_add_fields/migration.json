@@ -1,0 +1,42 @@
+{
+  "version": "6.1.0",
+  "steps": [
+    {
+      "tag": "AlterEnum",
+      "enum": "PropertyType",
+      "values": ["LAND", "HOUSE", "APARTMENT", "COMMERCIAL", "VILLA", "OFFICE"],
+      "addValues": ["VILLA", "OFFICE"]
+    },
+    {
+      "tag": "AlterTable",
+      "table": "properties",
+      "addColumns": [
+        { "name": "priceType", "type": "TEXT", "default": "'sale'", "isNullable": false },
+        { "name": "bedrooms", "type": "INTEGER", "default": 0, "isNullable": false },
+        { "name": "bathrooms", "type": "INTEGER", "default": 0, "isNullable": false },
+        { "name": "parking", "type": "INTEGER", "default": 0, "isNullable": false },
+        { "name": "floors", "type": "INTEGER", "isNullable": true },
+        { "name": "yearBuilt", "type": "INTEGER", "isNullable": true },
+        { "name": "amenities", "type": "TEXT[]", "default": "'{}'", "isNullable": false },
+        { "name": "features", "type": "TEXT[]", "default": "'{}'", "isNullable": false },
+        { "name": "city", "type": "TEXT", "default": "'Kigali'", "isNullable": false },
+        { "name": "isFeatured", "type": "BOOLEAN", "default": false, "isNullable": false }
+      ]
+    },
+    {
+      "tag": "AlterTable",
+      "table": "verification_requests",
+      "addColumns": [
+        { "name": "userId", "type": "TEXT", "isNullable": false }
+      ],
+      "addForeignKeys": [
+        {
+          "columns": ["userId"],
+          "referencedTable": "users",
+          "referencedColumns": ["id"],
+          "onDelete": "CASCADE"
+        }
+      ]
+    }
+  ]
+}
