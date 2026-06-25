@@ -5,8 +5,21 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 
 const Toggle: React.FC<{ checked: boolean; onChange: () => void }> = ({ checked, onChange }) => (
-  <button onClick={onChange} className={`relative w-10 h-5 rounded-full transition-colors ${checked ? "bg-[#C6A86A]" : "bg-white/10"}`} role="switch" aria-checked={checked}>
-    <span className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${checked ? "translate-x-5" : "translate-x-0.5"}`} />
+  <button
+    onClick={onChange}
+    className={`relative w-11 h-6 rounded-full transition-all duration-300 ${
+      checked
+        ? "bg-[#C6A86A] shadow-[0_0_10px_rgba(198,168,106,0.3)]"
+        : "bg-white/10 hover:bg-white/20"
+    }`}
+    role="switch"
+    aria-checked={checked}
+  >
+    <span
+      className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-lg transition-all duration-300 ${
+        checked ? "translate-x-5" : "translate-x-0"
+      }`}
+    />
   </button>
 );
 
