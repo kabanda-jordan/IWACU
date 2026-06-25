@@ -157,7 +157,7 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ type }) => {
       {/* Desktop sidebar */}
       <aside
         className={cn(
-          "hidden lg:flex flex-col shrink-0 bg-[#0E0E0E] border-r border-white/5 transition-all duration-300",
+          "hidden lg:flex flex-col shrink-0 bg-[#0E0E0E] border-r border-white/5 transition-all duration-300 sticky top-0 h-screen",
           collapsed ? "w-16" : "w-64"
         )}
       >
