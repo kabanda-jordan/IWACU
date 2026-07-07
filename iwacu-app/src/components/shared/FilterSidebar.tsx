@@ -2,7 +2,7 @@
 import React from "react";
 import { X, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { PROPERTY_TYPES, CITIES, AMENITIES, BEDROOM_OPTIONS } from "@/constants";
+import { PROPERTY_TYPES, CITIES, AMENITIES, BEDROOM_OPTIONS, BATHROOM_OPTIONS } from "@/constants";
 import { usePropertyStore } from "@/store/usePropertyStore";
 import { Button } from "@/components/ui/Button";
 import type { PropertyType, PropertyStatus } from "@/types";
@@ -113,6 +113,26 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({ className, onClose
               className={cn(
                 "flex-1 py-2 rounded-lg text-xs font-medium transition-colors",
                 filters.minBedrooms === b
+                  ? "bg-[#C6A86A] text-black"
+                  : "bg-white/5 text-white/50 hover:bg-white/10"
+              )}
+            >
+              {b === 0 ? "Any" : b + "+"}
+            </button>
+          ))}
+        </div>
+      </Section>
+
+      {/* Bathrooms */}
+      <Section title="Bathrooms (Min)">
+        <div className="flex gap-2">
+          {[0, ...BATHROOM_OPTIONS].map((b) => (
+            <button
+              key={b}
+              onClick={() => setFilters({ minBathrooms: b })}
+              className={cn(
+                "flex-1 py-2 rounded-lg text-xs font-medium transition-colors",
+                filters.minBathrooms === b
                   ? "bg-[#C6A86A] text-black"
                   : "bg-white/5 text-white/50 hover:bg-white/10"
               )}

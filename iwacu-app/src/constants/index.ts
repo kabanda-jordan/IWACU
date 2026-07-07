@@ -69,6 +69,7 @@ export const PRICE_RANGES = [
 ];
 
 export const BEDROOM_OPTIONS = [1, 2, 3, 4, 5];
+export const BATHROOM_OPTIONS = [1, 2, 3, 4, 5];
 
 export const SORT_OPTIONS = [
   { label: "Newest First", value: "newest" },
