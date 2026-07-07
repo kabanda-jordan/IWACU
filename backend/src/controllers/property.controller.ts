@@ -12,6 +12,19 @@ import {
 } from "../services/property.service";
 import { PropertyType } from "@prisma/client";
 
+// ── Get Current User's Properties ────────────────────────
+export const getMy = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).user.id
+    const role = (req as any).user.role
+    const filters = { ...req.query, ownerId: userId } as any
+    const result = await getProperties(filters)
+    return res.status(200).json(result)
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+
 // ── Get Featured Properties ──────────────────────────────
 export const getFeatured = async (req: Request, res: Response) => {
   try {

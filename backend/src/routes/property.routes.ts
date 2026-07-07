@@ -5,6 +5,7 @@ import {
   getAll,
   getOne,
   getFeatured,
+  getMy,
   update,
   remove,
   uploadImages,
@@ -86,6 +87,7 @@ router.get("/", getAll)
  *         description: List of featured properties
  */
 router.get("/featured", getFeatured)
+router.get("/my", protect, restrictTo("AGENT", "ADMIN"), getMy)
 
 /**
  * @swagger
