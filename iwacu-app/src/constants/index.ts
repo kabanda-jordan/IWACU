@@ -51,6 +51,21 @@ export const AMENITIES = [
   "Furnished",
 ];
 
+export const FEATURES = [
+  "Modern Kitchen",
+  "Tiled Floors",
+  "Built-in Wardrobes",
+  "Smart Home",
+  "CCTV",
+  "Water Tank",
+  "Wheelchair Access",
+  "Pet Friendly",
+  "Staff Quarters",
+  "Lake View",
+  "Mountain View",
+  "City View",
+];
+
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Properties", href: "/properties" },

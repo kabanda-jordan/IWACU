@@ -6,7 +6,7 @@ import { Upload, Plus, X, Check } from "lucide-react";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { CITIES, PROPERTY_TYPES, AMENITIES } from "@/constants";
+import { CITIES, PROPERTY_TYPES, AMENITIES, FEATURES } from "@/constants";
 import { cn } from "@/lib/utils";
 
 const STEPS = ["Basic Info", "Details", "Location", "Amenities", "Pricing"];
@@ -17,6 +17,7 @@ export default function AddPropertyPage() {
   const [submitted, setSubmitted] = useState(false);
   const [images, setImages] = useState<string[]>([]);
   const [amenities, setAmenities] = useState<string[]>([]);
+  const [features, setFeatures] = useState<string[]>([]);
   const [form, setForm] = useState({
     title: "", description: "", type: "Apartment", status: "For Sale",
     city: "Kigali", district: "", address: "",
@@ -27,6 +28,7 @@ export default function AddPropertyPage() {
 
   const update = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
   const toggleAmenity = (a: string) => setAmenities((prev) => prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a]);
+  const toggleFeature = (f: string) => setFeatures((prev) => prev.includes(f) ? prev.filter((x) => x !== f) : [...prev, f]);
 
   const handleSubmit = () => {
     setSubmitted(true);
@@ -188,6 +190,25 @@ export default function AddPropertyPage() {
                   >
                     {amenities.includes(a) ? <Check className="w-3.5 h-3.5 shrink-0" /> : <Plus className="w-3.5 h-3.5 shrink-0 opacity-50" />}
                     {a}
+                  </button>
+                ))}
+              </div>
+              <h4 className="text-white font-semibold text-base mt-6">Features</h4>
+              <p className="text-white/40 text-sm">Select notable features of this property.</p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {FEATURES.map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => toggleFeature(f)}
+                    className={cn(
+                      "flex items-center gap-2 px-3 py-2.5 rounded-xl border text-sm transition-colors text-left",
+                      features.includes(f)
+                        ? "bg-[#C6A86A]/10 border-[#C6A86A] text-[#C6A86A]"
+                        : "bg-white/3 border-white/10 text-white/50 hover:border-white/20"
+                    )}
+                  >
+                    {features.includes(f) ? <Check className="w-3.5 h-3.5 shrink-0" /> : <Plus className="w-3.5 h-3.5 shrink-0 opacity-50" />}
+                    {f}
                   </button>
                 ))}
               </div>
