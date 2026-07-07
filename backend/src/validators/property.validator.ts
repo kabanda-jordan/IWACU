@@ -25,9 +25,11 @@ export const createPropertySchema = z.object({
     .number()
     .positive('Size must be positive'),
 
-  propertyType: z.enum(['LAND', 'HOUSE', 'APARTMENT', 'COMMERCIAL'] as const, {
+  propertyType: z.enum(['LAND', 'HOUSE', 'APARTMENT', 'COMMERCIAL', 'VILLA', 'OFFICE'] as const, {
     message: 'Invalid property type',
   }),
+
+  priceType: z.enum(['sale', 'rent'] as const).optional(),
 
   district: z
     .string()
@@ -36,6 +38,19 @@ export const createPropertySchema = z.object({
   sector: z
     .string()
     .min(2, 'Sector is required'),
+
+  city: z.string().optional(),
+
+  bedrooms: z.number().int().min(0).optional(),
+  bathrooms: z.number().int().min(0).optional(),
+  parking: z.number().int().min(0).optional(),
+  floors: z.number().int().min(1).optional(),
+  yearBuilt: z.number().int().min(1800).max(2100).optional(),
+
+  amenities: z.array(z.string()).optional(),
+  features: z.array(z.string()).optional(),
+
+  isFeatured: z.boolean().optional(),
 
   latitude: z.number().optional(),
   longitude: z.number().optional(),
