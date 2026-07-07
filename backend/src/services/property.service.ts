@@ -29,6 +29,7 @@ interface CreatePropertyInput {
 }
 
 interface GetPropertiesFilter {
+  ownerId?: string
   district?: string
   sector?: string
   city?: string
@@ -79,6 +80,7 @@ export const createProperty = async (input: CreatePropertyInput) => {
 // ── Get Approved Properties (with filters & pagination) ─────────
 export const getProperties = async (filters: GetPropertiesFilter) => {
   const {
+    ownerId,
     district,
     sector,
     city,
@@ -109,6 +111,7 @@ export const getProperties = async (filters: GetPropertiesFilter) => {
   if (city) where.city = { contains: city, mode: 'insensitive' }
   if (propertyType) where.propertyType = propertyType
   if (isVerified !== undefined) where.isVerified = isVerified
+  if (ownerId) where.ownerId = ownerId
   if (minBedrooms) where.bedrooms = { gte: minBedrooms }
   if (minBathrooms) where.bathrooms = { gte: minBathrooms }
   if (amenities?.length) where.amenities = { hasSome: amenities }
