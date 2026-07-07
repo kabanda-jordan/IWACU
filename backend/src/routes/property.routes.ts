@@ -4,6 +4,7 @@ import {
   create,
   getAll,
   getOne,
+  getFeatured,
   update,
   remove,
   uploadImages,
@@ -67,6 +68,24 @@ const router = Router();
  *         description: List of properties with pagination
  */
 router.get("/", getAll)
+
+/**
+ * @swagger
+ * /api/properties/featured:
+ *   get:
+ *     summary: Get featured/promoted properties
+ *     tags: [Properties]
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: number
+ *         description: Number of featured properties (default 6)
+ *     responses:
+ *       200:
+ *         description: List of featured properties
+ */
+router.get("/featured", getFeatured)
 
 /**
  * @swagger
