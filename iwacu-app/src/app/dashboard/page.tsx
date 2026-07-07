@@ -7,20 +7,19 @@ import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import { usePropertyStore } from "@/store/usePropertyStore";
 import { useAuthStore } from "@/store/useAuthStore";
-import { MOCK_PROPERTIES } from "@/data/properties";
-
-const statCards = [
-  { label: "Saved Properties", value: 6, icon: Heart, color: "text-rose-400", bg: "bg-rose-400/10" },
-  { label: "Recent Views", value: 24, icon: Eye, color: "text-blue-400", bg: "bg-blue-400/10" },
-  { label: "Messages", value: 3, icon: MessageSquare, color: "text-green-400", bg: "bg-green-400/10" },
-  { label: "Notifications", value: 8, icon: Bell, color: "text-[#C6A86A]", bg: "bg-[#C6A86A]/10" },
-];
 
 export default function BuyerDashboard() {
   const { user } = useAuthStore();
-  const { getFavoriteProperties } = usePropertyStore();
-  const favorites = getFavoriteProperties();
-  const recentProperties = MOCK_PROPERTIES.slice(0, 3);
+  const { properties, recentlyViewed, favorites, getFavoriteProperties } = usePropertyStore();
+  const favs = getFavoriteProperties();
+  const recentProps = properties.filter((p) => recentlyViewed.includes(p.id)).slice(0, 3);
+
+  const statCards = [
+    { label: "Saved Properties", value: favs.length, icon: Heart, color: "text-rose-400", bg: "bg-rose-400/10" },
+    { label: "Recent Views", value: recentlyViewed.length, icon: Eye, color: "text-blue-400", bg: "bg-blue-400/10" },
+    { label: "Favorites", value: favorites.length, icon: Heart, color: "text-green-400", bg: "bg-green-400/10" },
+    { label: "Notifications", value: 0, icon: Bell, color: "text-[#C6A86A]", bg: "bg-[#C6A86A]/10" },
+  ];
 
   return (
     <div>
@@ -83,7 +82,7 @@ export default function BuyerDashboard() {
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-            {recentProperties.map((p, i) => (
+            {recentProps.map((p, i) => (
               <PropertyCard key={p.id} property={p} index={i} />
             ))}
           </div>
