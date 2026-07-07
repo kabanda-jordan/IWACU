@@ -1,17 +1,17 @@
 // src/controllers/property.controller.ts
-import { getPropertyAnalytics } from '../services/property.service'
 import { Request, Response } from "express";
 import {
   addPropertyImages,
   createProperty,
   getProperties,
   getPropertyBySlug,
+  getFeaturedProperties,
   updateProperty,
   deleteProperty,
+  getPropertyAnalytics,
 } from "../services/property.service";
 import { PropertyType } from "@prisma/client";
 
-// ── Upload Property Images ─────────────────────────────
 // ── Get Featured Properties ──────────────────────────────
 export const getFeatured = async (req: Request, res: Response) => {
   try {
