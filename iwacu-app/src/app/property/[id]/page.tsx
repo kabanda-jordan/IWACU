@@ -145,6 +145,9 @@ export default function PropertyDetailPage({
                           <ShieldCheck className="w-3 h-3" /> Verified
                         </Badge>
                       )}
+                      {property.isFeatured && (
+                        <Badge variant="green">Featured</Badge>
+                      )}
                     </div>
                     <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                       {property.title}
