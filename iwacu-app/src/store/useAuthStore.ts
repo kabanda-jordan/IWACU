@@ -26,7 +26,7 @@ const MOCK_USERS: User[] = [
     createdAt: "2024-01-01",
   },
   {
-    id: "user-agent-001",
+    id: "agent-001",
     name: "Emmanuel Habimana",
     email: "agent@iwacu.rw",
     phone: "+250 788 123 456",

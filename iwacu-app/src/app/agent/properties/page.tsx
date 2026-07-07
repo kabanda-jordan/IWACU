@@ -7,14 +7,17 @@ import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { MOCK_PROPERTIES } from "@/data/properties";
+import { useAuthStore } from "@/store/useAuthStore";
 import { formatPrice } from "@/lib/utils";
 
 export default function AgentPropertiesPage() {
+  const { user } = useAuthStore();
   const [search, setSearch] = useState("");
   const [deletedIds, setDeletedIds] = useState<string[]>([]);
 
   const properties = MOCK_PROPERTIES.filter(
     (p) =>
+      p.agentId === user?.id &&
       !deletedIds.includes(p.id) &&
       (p.title.toLowerCase().includes(search.toLowerCase()) ||
         p.city.toLowerCase().includes(search.toLowerCase()))
