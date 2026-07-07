@@ -31,13 +31,6 @@ const leadsData = [
   { month: "Jun", leads: 30 },
 ];
 
-const statCards = [
-  { label: "Total Listings", value: "34", icon: Home, color: "text-[#C6A86A]", bg: "bg-[#C6A86A]/10", change: "+3 this month" },
-  { label: "Total Views", value: "3,380", icon: Eye, color: "text-blue-400", bg: "bg-blue-400/10", change: "+22% vs last month" },
-  { label: "Active Leads", value: "120", icon: Users, color: "text-green-400", bg: "bg-green-400/10", change: "+8 this week" },
-  { label: "Messages", value: "18", icon: MessageSquare, color: "text-rose-400", bg: "bg-rose-400/10", change: "5 unread" },
-];
-
 const customTooltipStyle = {
   backgroundColor: "#111",
   border: "1px solid rgba(198,168,106,0.2)",
@@ -47,7 +40,16 @@ const customTooltipStyle = {
 
 export default function AgentDashboard() {
   const { user } = useAuthStore();
-  const myProperties = MOCK_PROPERTIES.filter((p) => p.agentId === "agent-001").slice(0, 5);
+  const allProperties = user ? MOCK_PROPERTIES.filter((p) => p.agentId === user.id) : [];
+  const myProperties = allProperties.slice(0, 5);
+  const totalViews = allProperties.reduce((s, p) => s + p.views, 0);
+
+  const statCards = [
+    { label: "Total Listings", value: String(myProperties.length), icon: Home, color: "text-[#C6A86A]", bg: "bg-[#C6A86A]/10", change: `${myProperties.length} active` },
+    { label: "Total Views", value: totalViews.toLocaleString(), icon: Eye, color: "text-blue-400", bg: "bg-blue-400/10", change: "Across all listings" },
+    { label: "Active Leads", value: "0", icon: Users, color: "text-green-400", bg: "bg-green-400/10", change: "Coming soon" },
+    { label: "Messages", value: "0", icon: MessageSquare, color: "text-rose-400", bg: "bg-rose-400/10", change: "No unread" },
+  ];
 
   return (
     <div>
