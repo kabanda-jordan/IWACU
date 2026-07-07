@@ -9,12 +9,22 @@ interface CreatePropertyInput {
   description: string
   priceRwf: number
   priceUsd?: number
+  priceType?: string
   sizeSqm: number
   propertyType: PropertyType
   district: string
   sector: string
+  city?: string
   latitude?: number
   longitude?: number
+  bedrooms?: number
+  bathrooms?: number
+  parking?: number
+  floors?: number
+  yearBuilt?: number
+  amenities?: string[]
+  features?: string[]
+  isFeatured?: boolean
   ownerId: string
 }
 
