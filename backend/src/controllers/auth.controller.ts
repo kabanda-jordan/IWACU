@@ -47,6 +47,15 @@ export const login = async (req: Request, res: Response) => {
   }
 }
 
+// ── Logout ─────────────────────────────────────────────
+export const logout = async (req: Request, res: Response) => {
+  try {
+    res.status(200).json({ message: 'Logged out successfully' })
+  } catch (error: any) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
 // ── Get Current User (me) ──────────────────────────────
 export const getMe = async (req: Request, res: Response) => {
   try {

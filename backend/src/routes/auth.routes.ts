@@ -1,6 +1,6 @@
 // src/routes/auth.routes.ts
 import { Router } from 'express'
-import { register, login, getMe } from '../controllers/auth.controller'
+import { register, login, logout, getMe } from '../controllers/auth.controller'
 import { protect } from '../middleware/auth.middleware'
 import { validate } from '../middleware/validate.middleware'
 import { registerSchema, loginSchema } from '../validators/auth.validator'
@@ -69,5 +69,19 @@ router.post('/login', validate(loginSchema), login)
  *         description: Not authenticated
  */
 router.get('/me', protect, getMe)
+
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   post:
+ *     summary: Logout current user
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Logged out successfully
+ */
+router.post('/logout', protect, logout)
 
 export default router
