@@ -19,7 +19,7 @@ const PER_PAGE = 9;
 
 function PropertiesContent() {
   const searchParams = useSearchParams();
-  const { filters, setFilters, sortBy, setSortBy, viewMode, setViewMode, getFilteredProperties } = usePropertyStore();
+  const { filters, setFilters, setSearchQuery, sortBy, setSortBy, viewMode, setViewMode, getFilteredProperties } = usePropertyStore();
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [showMobileFilter, setShowMobileFilter] = useState(false);
@@ -29,8 +29,10 @@ function PropertiesContent() {
     const status = searchParams.get("status") as PropertyStatus | null;
     const type = searchParams.get("type") as PropertyType | null;
     const city = searchParams.get("city");
+    const q = searchParams.get("q");
     const minPrice = searchParams.get("minPrice");
     const maxPrice = searchParams.get("maxPrice");
+    if (q) setSearchQuery(q);
     setFilters({
       ...(status && { status }),
       ...(type && { type }),
@@ -39,7 +41,7 @@ function PropertiesContent() {
       ...(maxPrice && { maxPrice: Number(maxPrice) }),
     });
     setTimeout(() => setLoading(false), 600);
-  }, [searchParams, setFilters]);
+  }, [searchParams, setFilters, setSearchQuery]);
 
   const allFiltered = getFilteredProperties();
   const totalPages = Math.ceil(allFiltered.length / PER_PAGE);
