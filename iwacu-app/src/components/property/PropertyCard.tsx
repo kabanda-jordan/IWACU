@@ -58,12 +58,12 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
               <Heart className={cn("w-4 h-4", isFav && "fill-current")} />
             </motion.span>
           </motion.button>
-          <Badge
-            variant={property.priceType === "rent" ? "blue" : "gold"}
-            className="absolute top-3 left-3"
-          >
-            {property.priceType === "rent" ? "For Rent" : "For Sale"}
-          </Badge>
+          <div className="absolute top-3 left-3 flex gap-2">
+            <Badge variant={property.priceType === "rent" ? "blue" : "gold"}>
+              {property.priceType === "rent" ? "For Rent" : "For Sale"}
+            </Badge>
+            {property.isFeatured && <Badge variant="green">Featured</Badge>}
+          </div>
         </div>
 
         <Link href={`/property/${property.id}`} className="flex flex-col justify-between p-5 flex-1">
