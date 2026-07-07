@@ -31,11 +31,16 @@ interface CreatePropertyInput {
 interface GetPropertiesFilter {
   district?: string
   sector?: string
+  city?: string
   propertyType?: PropertyType
   minPrice?: number
   maxPrice?: number
   minSize?: number
   maxSize?: number
+  minBedrooms?: number
+  minBathrooms?: number
+  amenities?: string[]
+  search?: string
   isVerified?: boolean
   sort?: string
   page?: number
@@ -76,11 +81,16 @@ export const getProperties = async (filters: GetPropertiesFilter) => {
   const {
     district,
     sector,
+    city,
     propertyType,
     minPrice,
     maxPrice,
     minSize,
     maxSize,
+    minBedrooms,
+    minBathrooms,
+    amenities,
+    search,
     isVerified,
     sort,
     page = 1,
@@ -96,8 +106,21 @@ export const getProperties = async (filters: GetPropertiesFilter) => {
 
   if (district) where.district = { contains: district, mode: 'insensitive' }
   if (sector) where.sector = { contains: sector, mode: 'insensitive' }
+  if (city) where.city = { contains: city, mode: 'insensitive' }
   if (propertyType) where.propertyType = propertyType
   if (isVerified !== undefined) where.isVerified = isVerified
+  if (minBedrooms) where.bedrooms = { gte: minBedrooms }
+  if (minBathrooms) where.bathrooms = { gte: minBathrooms }
+  if (amenities?.length) where.amenities = { hasSome: amenities }
+
+  if (search) {
+    where.OR = [
+      { title: { contains: search, mode: 'insensitive' } },
+      { description: { contains: search, mode: 'insensitive' } },
+      { district: { contains: search, mode: 'insensitive' } },
+      { city: { contains: search, mode: 'insensitive' } },
+    ]
+  }
 
   if (minPrice || maxPrice) {
     where.priceRwf = {
