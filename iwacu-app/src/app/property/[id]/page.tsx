@@ -34,6 +34,11 @@ export default function PropertyDetailPage({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
+  const [visitDate, setVisitDate] = useState("");
+  const [visitTime, setVisitTime] = useState("Morning (9am – 12pm)");
+  const [visitPhone, setVisitPhone] = useState("");
+  const [visitConfirmed, setVisitConfirmed] = useState(false);
+  const [messageText, setMessageText] = useState("");
 
   useEffect(() => {
     if (id) addRecentlyViewed(id);
@@ -331,13 +336,16 @@ export default function PropertyDetailPage({
                   <div className="space-y-3">
                     <textarea
                       rows={3}
+                      value={messageText}
+                      onChange={(e) => setMessageText(e.target.value)}
                       placeholder={`Hi, I'm interested in "${property.title}"...`}
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 resize-none focus:outline-none focus:border-[#C6A86A] transition-colors"
                     />
                     <Button
                       variant="gold"
                       className="w-full"
-                      onClick={() => setMessageSent(true)}
+                      disabled={!messageText.trim()}
+                      onClick={() => { if (messageText.trim()) setMessageSent(true); }}
                     >
                       Send Message
                     </Button>
@@ -424,37 +432,68 @@ export default function PropertyDetailPage({
             animate={{ opacity: 1, scale: 1 }}
             className="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md"
           >
-            <div className="flex items-center justify-between mb-5">
-              <h3 className="text-white font-semibold text-lg">Schedule a Visit</h3>
-              <button onClick={() => setContactOpen(false)} className="text-white/40 hover:text-white">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <label className="text-white/60 text-sm mb-1.5 block">Preferred Date</label>
-                <input type="date" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-[#C6A86A] transition-colors" />
+            {visitConfirmed ? (
+              <div className="text-center py-6">
+                <CheckCircle2 className="w-12 h-12 text-green-400 mx-auto mb-3" />
+                <h3 className="text-white font-semibold text-lg mb-1">Visit Scheduled!</h3>
+                <p className="text-white/50 text-sm mb-4">
+                  {visitDate} — {visitTime}. We'll contact you at {visitPhone}.
+                </p>
+                <Button variant="gold" onClick={() => { setContactOpen(false); setVisitConfirmed(false); setVisitDate(""); setVisitPhone(""); }}>
+                  Done
+                </Button>
               </div>
-              <div>
-                <label className="text-white/60 text-sm mb-1.5 block">Preferred Time</label>
-                <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-[#C6A86A] transition-colors">
-                  <option>Morning (9am – 12pm)</option>
-                  <option>Afternoon (12pm – 5pm)</option>
-                  <option>Evening (5pm – 7pm)</option>
-                </select>
-              </div>
-              <div>
-                <label className="text-white/60 text-sm mb-1.5 block">Your Phone</label>
-                <input type="tel" placeholder="+250 ..." className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#C6A86A] transition-colors" />
-              </div>
-              <Button
-                variant="gold"
-                className="w-full mt-2"
-                onClick={() => { setContactOpen(false); setMessageSent(true); }}
-              >
-                Confirm Visit
-              </Button>
-            </div>
+            ) : (
+              <>
+                <div className="flex items-center justify-between mb-5">
+                  <h3 className="text-white font-semibold text-lg">Schedule a Visit</h3>
+                  <button onClick={() => setContactOpen(false)} className="text-white/40 hover:text-white">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-white/60 text-sm mb-1.5 block">Preferred Date</label>
+                    <input
+                      type="date"
+                      value={visitDate}
+                      onChange={(e) => setVisitDate(e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-[#C6A86A] transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-white/60 text-sm mb-1.5 block">Preferred Time</label>
+                    <select
+                      value={visitTime}
+                      onChange={(e) => setVisitTime(e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-[#C6A86A] transition-colors"
+                    >
+                      <option>Morning (9am – 12pm)</option>
+                      <option>Afternoon (12pm – 5pm)</option>
+                      <option>Evening (5pm – 7pm)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-white/60 text-sm mb-1.5 block">Your Phone</label>
+                    <input
+                      type="tel"
+                      value={visitPhone}
+                      onChange={(e) => setVisitPhone(e.target.value)}
+                      placeholder="+250 ..."
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#C6A86A] transition-colors"
+                    />
+                  </div>
+                  <Button
+                    variant="gold"
+                    className="w-full mt-2"
+                    disabled={!visitDate || !visitPhone}
+                    onClick={() => { if (visitDate && visitPhone) setVisitConfirmed(true); }}
+                  >
+                    Confirm Visit
+                  </Button>
+                </div>
+              </>
+            )}
           </motion.div>
         </div>
       )}
