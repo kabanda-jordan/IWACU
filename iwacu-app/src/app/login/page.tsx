@@ -110,9 +110,13 @@ export default function LoginPage() {
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label className="text-sm font-medium text-white/80">Password</label>
-                <Link href="#" className="text-xs text-[#C6A86A] hover:underline">
+                <button
+                  type="button"
+                  onClick={() => alert("Password reset feature coming soon. Please contact support.")}
+                  className="text-xs text-[#C6A86A] hover:underline"
+                >
                   Forgot password?
-                </Link>
+                </button>
               </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
