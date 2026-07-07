@@ -132,7 +132,81 @@ async function main() {
   })
   console.log('Property 2 created:', property2.title)
 
-  // STEP 8: Buyer saves Property 1 as a favorite
+  // STEP 8: Create Property 3 - Villa in Rubavu (APPROVED, featured)
+  const property3 = await prisma.property.create({
+    data: {
+      title: 'Luxury Lake Kivu Villa with Private Beach',
+      description: 'Stunning 5-bedroom villa overlooking Lake Kivu in Rubavu. Private beach access, infinity pool, and lush tropical garden. Perfect for luxury living or high-end vacation rental.',
+      priceRwf: 250000000,
+      priceUsd: 180000,
+      priceType: 'sale',
+      sizeSqm: 450,
+      propertyType: PropertyType.VILLA,
+      district: 'Rubavu',
+      sector: 'Gisenyi',
+      city: 'Gisenyi',
+      latitude: -1.6932,
+      longitude: 29.2564,
+      bedrooms: 5,
+      bathrooms: 4,
+      parking: 3,
+      floors: 2,
+      yearBuilt: 2022,
+      amenities: ['Private Beach', 'Infinity Pool', 'Garden', 'Generator', 'Staff Quarters'],
+      features: ['Lake View', 'Modern Finishes', 'Smart Home', 'Solar System'],
+      isFeatured: true,
+      isVerified: true,
+      status: Status.APPROVED,
+      slug: 'luxury-lake-kivu-villa-rubavu',
+      ownerId: agent.id,
+      images: {
+        create: [
+          { imageUrl: 'https://placehold.co/800x600?text=Villa+Front' },
+          { imageUrl: 'https://placehold.co/800x600?text=Pool' },
+          { imageUrl: 'https://placehold.co/800x600?text=Lake+View' },
+        ],
+      },
+    },
+  })
+  console.log('Property 3 created:', property3.title)
+
+  // STEP 9: Create Property 4 - Office in Kicukiro (APPROVED)
+  const property4 = await prisma.property.create({
+    data: {
+      title: 'Modern Office Space in Kicukiro Commercial Hub',
+      description: 'Fully furnished office space in Kicukiro\'s newest commercial complex. Open-plan layout with private meeting rooms, kitchenette, and high-speed fiber internet.',
+      priceRwf: 45000000,
+      priceUsd: 32000,
+      priceType: 'rent',
+      sizeSqm: 180,
+      propertyType: PropertyType.OFFICE,
+      district: 'Kicukiro',
+      sector: 'Kicukiro',
+      city: 'Kigali',
+      latitude: -1.9807,
+      longitude: 30.0925,
+      bedrooms: 0,
+      bathrooms: 2,
+      parking: 4,
+      floors: 3,
+      amenities: ['Fiber Internet', 'Meeting Rooms', 'Kitchenette', 'Security', 'Generator'],
+      features: ['Open Plan', 'Furnished', 'Reception Area'],
+      isFeatured: false,
+      isVerified: true,
+      status: Status.APPROVED,
+      slug: 'modern-office-space-kicukiro',
+      ownerId: agent.id,
+      images: {
+        create: [
+          { imageUrl: 'https://placehold.co/800x600?text=Office+Front' },
+          { imageUrl: 'https://placehold.co/800x600?text=Open+Plan' },
+        ],
+      },
+    },
+  })
+  console.log('Property 4 created:', property4.title)
+
+  // STEP 10: Buyer saves Property 1 as a favorite
   await prisma.favorite.create({
     data: {
       userId: buyer.id,
@@ -141,7 +215,7 @@ async function main() {
   })
   console.log('Favorite created')
 
-  // STEP 9: Buyer sends a message to Agent about Property 1
+  // STEP 11: Buyer sends a message to Agent about Property 1
   await prisma.message.create({
     data: {
       content: 'Hello, I am interested in the house in Kimihurura. Is it still available?',
@@ -152,7 +226,7 @@ async function main() {
   })
   console.log('Message created')
 
-  // STEP 10: Buyer leaves a 5-star review for the Agent
+  // STEP 12: Buyer leaves a 5-star review for the Agent
   await prisma.review.create({
     data: {
       rating: 5,
@@ -164,12 +238,13 @@ async function main() {
   })
   console.log('Review created')
 
-  // STEP 11: Create a verification request for Property 2
+  // STEP 13: Create a verification request for Property 2
   await prisma.verificationRequest.create({
     data: {
       documentUrl: 'https://placehold.co/400x300?text=Land+Title+Doc',
       status: VerificationStatus.PENDING,
       propertyId: property2.id,
+      userId: agent.id,
       reviewedBy: admin.id,
     },
   })
